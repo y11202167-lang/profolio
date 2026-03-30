@@ -75,3 +75,160 @@
             display: none;
             position: fixed;
             top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            z-index: 1000;
+            width: 90%;
+            max-width: 450px;
+            border: 1px solid #e2e8f0;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+        }
+    </style>
+</head>
+<body onload="runIntro()">
+
+    <div id="auto-intro">
+        <div class="animate__animated animate__fadeIn">
+            <h2 class="text-2xl font-light tracking-[0.5em] text-slate-700 mb-4">黃鈺舜 · 作品集</h2>
+            <div class="intro-line mx-auto"></div>
+            <p class="text-slate-400 mt-4 text-sm animate__animated animate__fadeIn animate__delay-1s">科技應用專題展現中...</p>
+        </div>
+    </div>
+
+    <div id="overlay" class="overlay" onclick="closeAlert()"></div>
+    <div id="alertBox" class="custom-alert">
+        <h3 id="alertTitle" class="text-xl font-bold text-sky-600 mb-3">創作心得</h3>
+        <p id="alertText" class="text-slate-600 leading-relaxed mb-6"></p>
+        <button onclick="closeAlert()" class="w-full py-3 bg-slate-100 hover:bg-slate-200 rounded-xl font-bold transition">我知道了</button>
+    </div>
+
+    <div class="grid-layout">
+        <header class="grid-area-[header] bg-white border-b flex items-center justify-between px-8 z-50" style="grid-area: header;">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-sky-500 rounded-lg flex items-center justify-center text-white font-bold">舜</div>
+                <h1 class="font-bold text-slate-700">114-2 高三科技應用專題作品集 - <span class="text-sky-500">31225 黃鈺舜</span></h1>
+            </div>
+            <div class="px-4 py-1 bg-sky-50 text-sky-600 rounded-full text-xs font-bold">2026 SPRING PORTFOLIO</div>
+        </header>
+
+        <aside class="bg-white border-r p-6" style="grid-area: sidebar;">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-6">Explore Works</p>
+            <nav>
+                <div onclick="showTab('game')" id="nav-game" class="nav-link active p-4 flex items-center gap-3">
+                    <span class="text-xl">🎮</span> <span class="font-medium">極光戰機:霓虹對決</span>
+                </div>
+                <div onclick="showTab('3d')" id="nav-3d" class="nav-link p-4 flex items-center gap-3">
+                    <span class="text-xl">🦖</span> <span class="font-medium">3D作品：蠟筆小新</span>
+                </div>
+                <div onclick="showTab('reflect')" id="nav-reflect" class="nav-link p-4 flex items-center gap-3">
+                    <span class="text-xl">📝</span> <span class="font-medium">學習反思與總結</span>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="p-10 overflow-y-auto bg-[#fcfdfe]" style="grid-area: main;">
+            
+            <section id="tab-game" class="section-content active">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold text-slate-800">極光戰機：霓虹對決</h2>
+                    <button onclick="openAlert('game')" class="bg-white shadow-sm border px-5 py-2 rounded-xl hover:shadow-md transition flex items-center gap-2">
+                        <span>💭</span> 點我心路歷程
+                    </button>
+                </div>
+                <div class="bg-white p-3 rounded-3xl shadow-xl border border-slate-100">
+                    <iframe src="https://y11202167-lang.github.io/game/ai_studio_code%20(1).html" class="w-full h-[65vh] rounded-2xl"></iframe>
+                </div>
+            </section>
+
+            <section id="tab-3d" class="section-content">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold text-slate-800">3D 作品：蠟筆小新</h2>
+                    <button onclick="openAlert('3d')" class="bg-white shadow-sm border px-5 py-2 rounded-xl hover:shadow-md transition flex items-center gap-2">
+                        <span>💭</span> 創作秘辛
+                    </button>
+                </div>
+                <div class="bg-white p-3 rounded-3xl shadow-xl border border-slate-100">
+                    <iframe src="https://y11202167-lang.github.io/3d/index.html" class="w-full h-[65vh] rounded-2xl"></iframe>
+                </div>
+            </section>
+
+            <section id="tab-reflect" class="section-content">
+                <h2 class="text-3xl font-bold text-slate-800 mb-10">學習反思與總結</h2>
+                <div class="space-y-8 max-w-4xl">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-sky-50 p-8 rounded-3xl border border-sky-100">
+                            <h3 class="text-sky-700 font-bold mb-4">🔧 學習地圖</h3>
+                            <ul class="space-y-3 text-sky-900/70 text-sm">
+                                <li>• Monster Mash & Polycam 建模</li>
+                                <li>• Google AI Studio 遊戲生成</li>
+                                <li>• GitHub 網頁佈署實務</li>
+                                <li>• Gemini 輔助介面設計</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-800 p-8 rounded-3xl text-white">
+                            <h3 class="text-sky-400 font-bold mb-4">🎯 核心體會</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                使用 Google AI Studio 製作遊戲非常有趣，這種透過 AI 快速實現創意的過程讓我印象深刻。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100">
+                        <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
+                            <span class="w-2 h-6 bg-sky-500 rounded-full"></span> 困難克服與成就感
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            我覺得最難的是網頁上傳到 GitHub 的過程，步驟非常瑣碎，碰到了非常多困難，常常找不到自己在做哪裡。但還好最後一一解決，看著成果上線，得到了滿滿的成就感。
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // 1. 自動進場邏輯
+        function runIntro() {
+            setTimeout(() => {
+                document.getElementById('auto-intro').style.transform = 'translateY(-100%)';
+            }, 1800); // 1.8秒後自動滑開
+        }
+
+        // 2. 選單切換
+        function showTab(id) {
+            document.querySelectorAll('.section-content').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
+            
+            document.getElementById('tab-' + id).classList.add('active');
+            document.getElementById('nav-' + id).classList.add('active');
+        }
+
+        // 3. 彈窗心得
+        const texts = {
+            game: "我覺得用AI製作遊戲非常好用，只要輸入指令就能馬上做出來，但只要少輸入一些就會出現沒界線之類的失誤，會導致很難遊玩，修飾錯誤完之後很有成就感！",
+            3d: "這個作品是使用 monster mash 完成的，因為我很喜歡蠟筆小新，我想讓他的腿看著像在跑步。"
+        };
+
+        function openAlert(type) {
+            document.getElementById('alertText').innerText = texts[type];
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('alertBox').style.display = 'block';
+        }
+
+        function closeAlert() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('alertBox').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

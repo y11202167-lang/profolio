@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>114-2 高三科技應用專題作品集 - 黃鈺舜</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/10.16.4/framer-motion.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f0f7f4;
+            color: #2d3748;
+            overflow-x: hidden;
+        }
+
+        /* 故事感進場動畫 */
+        #intro-overlay {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease-out;
+        }
+
+        .fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* 側邊欄懸浮效果 */
+        .nav-item {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background-color: #ffffff;
+            border-left: 4px solid #68d391;
+            padding-left: 1.5rem;
+            color: #2f855a;
+        }
+
+        /* 內容區塊滑入動畫 */
+        .slide-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        .slide-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 氣泡彈窗樣式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            animation: popIn 0.3s ease-out;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        iframe {
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            width: 100%;
+            height: 600px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="intro-overlay">
+        <h1 class="text-4xl font-bold text-green-800 mb-4 tracking-widest">數位冒險之旅</h1>
+        <p class="text-green-700 mb-8">正在載入 黃鈺舜 的學習宇宙...</p>
+        <button onclick="startJourney()" class="px-8 py-3 bg-white text-green-600 rounded-full font-bold shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
+            開啟作品集
+        </button>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content relative">
+            <span class="absolute top-4 right-4 cursor-pointer text-2xl" onclick="closeModal()">&times;</span>
+            <h3 id="modal-title" class="text-xl font-bold text-green-700 mb-3">💡 創作小筆記</h3>
+            <p id="modal-body" class="text-gray-600 leading-relaxed"></p>
+        </div>
+    </div>
+
+    <div class="flex flex-col h-screen">
+        <header class="h-20 bg-white shadow-sm flex items-center px-8 z-10 border-b border-green-100">
+            <div class="flex items-center space-x-4">
+                <div class="w-10 h-10 bg-green-400 rounded-lg flex items-center justify-center text-white font-bold">舜</div>
+                <h1 class="text-xl font-bold text-gray-700">114-2 高三科技應用專題作品集 - <span class="text-green-600">31225 黃鈺舜</span></h1>
+            </div>
+        </header>
+
+        <div class="flex flex-1 overflow-hidden">
+            <nav class="w-64 bg-gray-50 p-6 flex flex-col space-y-2 border-r border-gray-100 overflow-y-auto">
+                <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">作品分類</p>
+                <div onclick="showContent('game')" class="nav-item p-4 rounded-xl font-medium active">🎮 網頁遊戲 1</div>
+                <div onclick="showContent('3d')" class="nav-item p-4 rounded-xl font-medium">🎨 3D 作品集 A</div>
+                <div onclick="showContent('reflection')" class="nav-item p-4 rounded-xl font-medium">📝 學習反思與總結</div>
+            </nav>
+
+            <main id="main-content" class="flex-1 p-8 overflow-y-auto bg-white">
+                <div id="content-game" class="content-section slide-in visible">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-3xl font-bold text-gray-800">極光戰機：霓虹對決</h2>
+                        <button onclick="showTip('game')" class="text-sm bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full hover:bg-yellow-200 transition">💡 查看心得</button>
+                    </div>
+                    <div class="glass-card p-4 mb-6">
+                        <iframe src="https://y11202167-lang.github.io/game/ai_studio_code%20(1).html"></iframe>
+                    </div>
+                </div>
+
+                <div id="content-3d" class="content-section slide-in hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-3xl font-bold text-gray-800">3D 作品：蠟筆小新</h2>
+                        <button onclick="showTip('3d')" class="text-sm bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full hover:bg-yellow-200 transition">💡 查看心得</button>
+                    </div>
+                    <p class="text-gray-500 mb-4">角色分類：動畫人物</p>
+                    <div class="glass-card p-4 mb-6">
+                        <iframe src="https://y11202167-lang.github.io/3d/index.html"></iframe>
+                    </div>
+                </div>
+
+                <div id="content-reflection" class="content-section slide-in hidden">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-8 border-b-2 border-green-200 pb-4">學期旅程總結</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div class="p-6 bg-green-50 rounded-2xl">
+                            <h4 class="font-bold text-green-800 mb-3">🛠️ 掌握技術</h4>
+                            <ul class="space-y-2 text-green-700">
+                                <li>1. Monster Mash & Polycam 建模</li>
+                                <li>2. Google AI Studio 網頁生成</li>
+                                <li>3. GitHub 雲端佈署</li>
+                                <li>4. Gemini 網頁架構設計</li>
+                            </ul>
+                        </div>
+                        <div class="p-6 bg-blue-50 rounded-2xl">
+                            <h4 class="font-bold text-blue-800 mb-3">🌟 核心亮點</h4>
+                            <p class="text-blue-700 leading-relaxed">
+                                使用 Google AI Studio 生成遊戲的過程非常有趣，讓我深刻體會到 AI 輔助開發的高效率與可能性。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="p-8 bg-gray-50 rounded-3xl border border-gray-100">
+                        <h4 class="font-bold text-gray-800 mb-4">💭 深度反思</h4>
+                        <p class="text-gray-600 leading-relaxed">
+                            我覺得最難的是網頁上傳到 GitHub 的過程，步驟非常瑣碎，碰到了非常多困難，常常找不到自己在做哪裡。還好在過程中一一解決，最後當網頁成功呈現時，得到了滿滿的成就感。
+                        </p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // 進場動畫控制
+        function startJourney() {
+            document.getElementById('intro-overlay').classList.add('fade-out');
+            setTimeout(() => {
+                document.getElementById('content-game').classList.add('visible');
+            }, 500);
+        }
+
+        // 選單切換邏輯
+        function showContent(type) {
+            // 隱藏所有區塊
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.add('hidden');
+                section.classList.remove('visible');
+            });
+
+            // 顯示對應區塊並加入動畫
+            const activeSection = document.getElementById('content-' + type);
+            activeSection.classList.remove('hidden');
+            setTimeout(() => {
+                activeSection.classList.add('visible');
+            }, 50);
+
+            // 更新選單樣式
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                if(item.innerText.includes(type === 'game' ? '遊戲' : type === '3d' ? '3D' : '反思')) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        // 彈出視窗邏輯
+        const tips = {
+            game: "我覺得用 AI 製作遊戲非常好用，只要輸入指令就能馬上做出來，但只要少輸入一些就會出現沒界線之類的失誤，會導致很難遊玩，修飾錯誤完之後很有成就感！",
+            3d: "這個作品是使用 Monster Mash 完成的，因為我很喜歡蠟筆小新，我想讓他的腿看著像在跑步。雖然調整動作花了不少心思，但看到小新動起來真的很開心！"
+        };
+
+        function showTip(type) {
+            document.getElementById('modal-body').innerText = tips[type];
+            document.getElementById('myModal').style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
+
+        // 點擊視窗外關閉
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('myModal')) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

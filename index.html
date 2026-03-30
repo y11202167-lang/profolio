@@ -70,4 +70,157 @@
 
         /* 區塊滑入動畫 */
         .section-view {
-            display:
+            display: none;
+            animation: slideUp 0.6s ease-out forwards;
+        }
+        .section-view.active { display: block; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 玻璃擬態卡片 */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+        }
+
+        /* 自定義捲軸 */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <div id="loading-screen">
+        <div class="animate__animated animate__fadeInDown">
+            <div class="w-24 h-1 bg-sky-200 mb-6 mx-auto"></div>
+            <p class="intro-text">JOURNEY OF SHUN</p>
+            <p class="text-gray-400 text-center mt-2">數位足跡 · 2026</p>
+        </div>
+        <button onclick="enterSite()" class="mt-12 px-10 py-3 border-2 border-sky-400 text-sky-500 rounded-full hover:bg-sky-400 hover:text-white transition-all font-bold">
+            踏入數位領域
+        </button>
+    </div>
+
+    <div class="app-container">
+        
+        <header class="bg-white/90 backdrop-blur shadow-sm flex items-center justify-between px-10 border-b">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl">🚀</span>
+                <h1 class="text-xl font-bold text-slate-700 tracking-tight">114-2 高三科技應用專題作品集 - <span class="text-sky-600">31225 黃鈺舜</span></h1>
+            </div>
+            <div class="text-sm text-slate-400 font-mono">Build with Gemini & AI Studio</div>
+        </header>
+
+        <aside class="bg-white p-8 border-r">
+            <div class="space-y-6">
+                <div>
+                    <p class="text-xs font-bold text-slate-400 mb-4 tracking-tighter">PORTFOLIO MENU</p>
+                    <nav class="space-y-2">
+                        <div onclick="switchTab('game')" id="btn-game" class="menu-item active p-4 rounded-2xl cursor-pointer flex items-center space-x-3">
+                            <span>🎮</span> <span class="font-semibold">極光戰機:霓虹對決</span>
+                        </div>
+                        <div onclick="switchTab('3d')" id="btn-3d" class="menu-item p-4 rounded-2xl cursor-pointer flex items-center space-x-3">
+                            <span>✨</span> <span class="font-semibold">3D 作品：蠟筆小新</span>
+                        </div>
+                        <div onclick="switchTab('note')" id="btn-note" class="menu-item p-4 rounded-2xl cursor-pointer flex items-center space-x-3">
+                            <span>💡</span> <span class="font-semibold">學習反思與總結</span>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </aside>
+
+        <main class="p-10 overflow-y-auto">
+            
+            <section id="view-game" class="section-view active">
+                <div class="flex justify-between items-end mb-8">
+                    <div>
+                        <span class="bg-sky-100 text-sky-600 px-3 py-1 rounded-md text-sm font-bold">Web Game</span>
+                        <h2 class="text-4xl font-bold mt-2 text-slate-800">極光戰機：霓虹對決</h2>
+                    </div>
+                    <button onclick="alertInsight('game')" class="bg-amber-50 text-amber-600 px-6 py-2 rounded-full border border-amber-200 hover:bg-amber-100 transition">
+                        查看創作心得 💭
+                    </button>
+                </div>
+                <div class="glass-card p-2 shadow-2xl">
+                    <iframe src="https://y11202167-lang.github.io/game/ai_studio_code%20(1).html" class="w-full h-[600px] rounded-xl"></iframe>
+                </div>
+            </section>
+
+            <section id="view-3d" class="section-view">
+                <div class="flex justify-between items-end mb-8">
+                    <div>
+                        <span class="bg-rose-100 text-rose-600 px-3 py-1 rounded-md text-sm font-bold">3D Modeling</span>
+                        <h2 class="text-4xl font-bold mt-2 text-slate-800">蠟筆小新</h2>
+                        <p class="text-slate-400 mt-2">類型：動畫人物 / 工具：Monster Mash</p>
+                    </div>
+                    <button onclick="alertInsight('3d')" class="bg-amber-50 text-amber-600 px-6 py-2 rounded-full border border-amber-200 hover:bg-amber-100 transition">
+                        查看創作心得 💭
+                    </button>
+                </div>
+                <div class="glass-card p-2 shadow-2xl">
+                    <iframe src="https://y11202167-lang.github.io/3d/index.html" class="w-full h-[600px] rounded-xl"></iframe>
+                </div>
+            </section>
+
+            <section id="view-note" class="section-view">
+                <h2 class="text-4xl font-bold text-slate-800 mb-10">學習反思與總結</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                    <div class="glass-card p-8 border-l-4 border-sky-400">
+                        <h3 class="text-xl font-bold mb-4 text-sky-700">📚 課程內容回顧</h3>
+                        <ul class="space-y-3 text-slate-600">
+                            <li class="flex items-start"><span class="mr-2">1.</span> 使用 Monster Mash 及 Polycam 製作 3D 物件</li>
+                            <li class="flex items-start"><span class="mr-2">2.</span> 使用 Google AI Studio 生成網頁遊戲</li>
+                            <li class="flex items-start"><span class="mr-2">3.</span> 使用 GitHub 上傳網頁</li>
+                            <li class="flex items-start"><span class="mr-2">4.</span> 使用 Gemini 生成學習成果網站首頁</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-8 border-l-4 border-amber-400">
+                        <h3 class="text-xl font-bold mb-4 text-amber-700">🌟 心得總結</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            製作遊戲非常有意思，特別是 <strong>Google AI Studio</strong> 的效率令我印象深刻。雖然上傳 GitHub 的過程非常瑣碎，碰到不少困難，但一一解決後獲得的成就感是無價的！
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        // 進入網頁
+        function enterSite() {
+            document.getElementById('loading-screen').style.transform = 'translateY(-100%)';
+        }
+
+        // 切換分頁
+        function switchTab(tabId) {
+            // 處理選單樣式
+            document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
+            document.getElementById('btn-' + tabId).classList.add('active');
+
+            // 處理內容顯示
+            document.querySelectorAll('.section-view').forEach(el => el.classList.remove('active'));
+            document.getElementById('view-' + tabId).classList.add('active');
+        }
+
+        // 彈出心得提示 (重點提醒)
+        function alertInsight(type) {
+            const insights = {
+                game: "【極光戰機：霓虹對決】\n\n心得：我覺得用AI製作遊戲非常好用，只要輸入指令就能馬上做出來，但只要少輸入一些就會出現沒界線之類的失誤，會導致很難遊玩，修飾錯誤完之後很有成就感！",
+                3d: "【蠟筆小新 3D】\n\n心得：這個作品是使用 monster mash 完成的，因為我很喜歡蠟筆小新，我想讓他的腿看著像在跑步。"
+            };
+            
+            // 使用更美觀的 SweetAlert 或原生 Alert（此處示範原生但格式化）
+            alert(insights[type]);
+        }
+    </script>
+</body>
+</html>
